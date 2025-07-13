@@ -70,4 +70,9 @@ public class PacketDeclareCommands implements PacketOut {
         msg.writeVarInt(0);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
 }

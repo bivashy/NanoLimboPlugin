@@ -19,6 +19,7 @@ package ua.nanit.limbo.connection.pipeline;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import ua.nanit.limbo.protocol.ByteMessage;
 import ua.nanit.limbo.protocol.Packet;
@@ -45,23 +46,24 @@ public class PacketDecoder extends MessageToMessageDecoder<ByteBuf> {
         ByteMessage msg = new ByteMessage(buf);
         int packetId = msg.readVarInt();
         Packet packet = mappings.getPacket(packetId);
-
-        if (packet != null) {
-            Log.debug("Received packet %s[0x%s] (%d bytes)", packet.toString(), Integer.toHexString(packetId), msg.readableBytes());
-            try {
-                packet.decode(msg, version);
-            } catch (Exception e) {
-                if (Log.isDebug()) {
-                    Log.warning("Cannot decode packet 0x%s", e, Integer.toHexString(packetId));
-                } else {
-                    Log.warning("Cannot decode packet 0x%s: %s", Integer.toHexString(packetId), e.getMessage());
-                }
-            }
-
-            ctx.fireChannelRead(packet);
-        } else {
+        if (packet == null) {
             Log.debug("Undefined incoming packet: 0x" + Integer.toHexString(packetId));
+            return;
         }
+
+        Log.debug("Received packet %s[0x%s] (%d bytes)", packet.toString(), Integer.toHexString(packetId), msg.readableBytes());
+
+        try {
+            packet.decode(msg, version);
+        } catch (Exception e) {
+            throw new DecoderException("Cannot decode packet 0x" + Integer.toHexString(packetId), e);
+        }
+
+        if (buf.isReadable()) {
+            throw new DecoderException("Packet 0x" + Integer.toHexString(packetId) + " larger than expected, extra bytes: " + msg.readableBytes());
+        }
+
+        ctx.fireChannelRead(packet);
     }
 
     public void updateVersion(Version version) {

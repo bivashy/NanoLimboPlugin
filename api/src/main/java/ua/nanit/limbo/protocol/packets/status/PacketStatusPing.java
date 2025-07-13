@@ -19,11 +19,12 @@ package ua.nanit.limbo.protocol.packets.status;
 
 import ua.nanit.limbo.connection.ClientConnection;
 import ua.nanit.limbo.protocol.ByteMessage;
-import ua.nanit.limbo.protocol.Packet;
+import ua.nanit.limbo.protocol.PacketIn;
+import ua.nanit.limbo.protocol.PacketOut;
 import ua.nanit.limbo.protocol.registry.Version;
 import ua.nanit.limbo.server.LimboServer;
 
-public class PacketStatusPing implements Packet {
+public class PacketStatusPing implements PacketIn, PacketOut {
 
     private long randomId;
 

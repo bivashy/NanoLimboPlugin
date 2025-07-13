@@ -22,4 +22,9 @@ public class PacketGameEvent implements PacketOut {
         msg.writeByte(type);
         msg.writeFloat(value);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }

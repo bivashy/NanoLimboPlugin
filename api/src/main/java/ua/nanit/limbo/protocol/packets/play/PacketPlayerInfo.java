@@ -84,6 +84,11 @@ public class PacketPlayerInfo implements PacketOut {
         }
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
     public static enum Action {
         ADD_PLAYER,
         INITIALIZE_CHAT,

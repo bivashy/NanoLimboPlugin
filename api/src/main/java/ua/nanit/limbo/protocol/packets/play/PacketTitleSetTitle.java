@@ -35,4 +35,8 @@ public class PacketTitleSetTitle implements PacketOut {
         msg.writeNbtMessage(title, version);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }

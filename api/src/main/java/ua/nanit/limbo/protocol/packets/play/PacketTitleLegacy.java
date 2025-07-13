@@ -66,6 +66,11 @@ public class PacketTitleLegacy implements PacketOut {
         }
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
     public enum Action {
         SET_TITLE(0),
         SET_SUBTITLE(1),

@@ -57,6 +57,11 @@ public class PacketChatMessage implements PacketOut {
             msg.writeUuid(sender);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
     public enum PositionLegacy {
 
         CHAT(0),

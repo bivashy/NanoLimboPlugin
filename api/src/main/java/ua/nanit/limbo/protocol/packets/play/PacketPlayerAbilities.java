@@ -46,4 +46,9 @@ public class PacketPlayerAbilities implements PacketOut {
         msg.writeFloat(fieldOfView);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
 }

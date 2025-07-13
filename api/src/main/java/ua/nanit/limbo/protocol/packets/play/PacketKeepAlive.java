@@ -18,10 +18,11 @@
 package ua.nanit.limbo.protocol.packets.play;
 
 import ua.nanit.limbo.protocol.ByteMessage;
-import ua.nanit.limbo.protocol.Packet;
+import ua.nanit.limbo.protocol.PacketIn;
+import ua.nanit.limbo.protocol.PacketOut;
 import ua.nanit.limbo.protocol.registry.Version;
 
-public class PacketKeepAlive implements Packet {
+public class PacketKeepAlive implements PacketIn, PacketOut {
 
     private long id;
 

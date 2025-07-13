@@ -21,7 +21,7 @@ import ua.nanit.limbo.server.Command;
 import ua.nanit.limbo.server.CommandHandler;
 import ua.nanit.limbo.server.LimboServer;
 
-@Plugin(id = "nanolimbovelocity", name = "NanoLimboVelocity", version = "1.0.11", authors = "bivashy, Nan1t")
+@Plugin(id = "nanolimbovelocity", name = "NanoLimboVelocity", version = "1.0.15", authors = "bivashy, Nan1t")
 public class NanoLimboVelocity {
     static {
         NanoLimbo.class.getName(); // For preventing shadow jar minimizing
@@ -54,7 +54,7 @@ public class NanoLimboVelocity {
             this.server.registerServer(serverInfo);
             try {
                 server.start();
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }

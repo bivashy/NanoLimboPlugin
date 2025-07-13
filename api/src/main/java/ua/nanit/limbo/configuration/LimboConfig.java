@@ -18,6 +18,8 @@ public interface LimboConfig {
 
     int getGameMode();
 
+    boolean isSecureProfile();
+
     InfoForwarding getInfoForwarding();
 
     long getReadTimeout();

@@ -1,13 +1,13 @@
 package ua.nanit.limbo.protocol;
 
-import net.kyori.adventure.nbt.BinaryTag;
+import net.kyori.adventure.nbt.CompoundBinaryTag;
 
 public class NbtMessage {
 
     private String json;
-    private BinaryTag tag;
+    private CompoundBinaryTag tag;
 
-    public NbtMessage(String json, BinaryTag tag) {
+    public NbtMessage(String json, CompoundBinaryTag tag) {
         this.json = json;
         this.tag = tag;
     }
@@ -20,11 +20,11 @@ public class NbtMessage {
         this.json = json;
     }
 
-    public BinaryTag getTag() {
+    public CompoundBinaryTag getTag() {
         return tag;
     }
 
-    public void setTag(BinaryTag tag) {
+    public void setTag(CompoundBinaryTag tag) {
         this.tag = tag;
     }
 }

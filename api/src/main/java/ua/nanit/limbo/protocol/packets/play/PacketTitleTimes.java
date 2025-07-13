@@ -46,4 +46,8 @@ public class PacketTitleTimes implements PacketOut {
         msg.writeInt(fadeOut);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }

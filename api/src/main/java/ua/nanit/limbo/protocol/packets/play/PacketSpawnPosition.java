@@ -24,6 +24,11 @@ public class PacketSpawnPosition implements PacketOut {
         msg.writeFloat(0);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
     private static long encodePosition(long x, long y, long z) {
         return ((x & 0x3FFFFFF) << 38) | ((z & 0x3FFFFFF) << 12) | (y & 0xFFF);
     }

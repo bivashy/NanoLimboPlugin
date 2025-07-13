@@ -1,23 +1,25 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+    id 'com.gradleup.shadow' version '8.3.6'
+    id 'com.github.gmazzo.buildconfig' version '3.1.0'
 }
 
 allprojects {
     group 'ua.nanit'
-    version '1.8.1'
+    version '1.0.15'
 }
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'com.gradleup.shadow'
 
     compileJava {
         options.encoding = "UTF-8"
     }
 
     tasks.withType(JavaCompile).configureEach {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     repositories {
@@ -25,18 +27,32 @@ subprojects {
     }
 
     dependencies {
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.1'
 
-        implementation 'org.spongepowered:configurate-yaml:4.1.2'
-        implementation 'io.netty:netty-all:4.1.101.Final'
-        implementation 'net.kyori:adventure-nbt:4.14.0'
-        implementation 'com.grack:nanojson:1.8'
-        implementation 'com.google.code.gson:gson:2.10.1'
+        implementation 'org.spongepowered:configurate-yaml:4.2.0'
+        implementation 'io.netty:netty-all:4.2.2.Final'
+        implementation "net.kyori:adventure-text-serializer-plain:4.21.0"
+        implementation "net.kyori:adventure-text-serializer-gson:4.21.0"
+        implementation "net.kyori:adventure-text-serializer-legacy:4.21.0"
+        implementation 'net.kyori:adventure-nbt:4.22.0'
+        implementation 'com.grack:nanojson:1.10'
+        implementation 'com.google.code.gson:gson:2.13.1'
     }
 
     shadowJar {
         from 'LICENSE'
+        minimize()
+        relocate 'io.netty', 'ua.nanit.shaded.io.netty'
+        relocate 'io.leangen', 'ua.nanit.shaded.io.leangen'
+        relocate 'com.google.errorprone', 'ua.nanit.shaded.com.google.errorprone'
+        relocate 'com.google.gson', 'ua.nanit.shaded.com.google.gson'
+        relocate 'com.grack.nanojson', 'ua.nanit.shaded.com.grack.nanojson'
+        relocate 'net.kyori.adventure', 'ua.nanit.shaded.net.kyori.adventure'
+        relocate 'net.kyori.examination', 'ua.nanit.shaded.net.kyori.examination'
+        relocate 'net.kyori.option', 'ua.nanit.shaded.net.kyori.option'
+        relocate 'org.spongepowered.configurate', 'ua.nanit.shaded.org.spongepowered.configurate'
+        relocate 'revxrsal.commands', 'ua.nanit.shaded.revxrsal.commands'
         minimize()
     }
 

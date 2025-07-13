@@ -18,7 +18,7 @@ import ua.nanit.limbo.protocol.NbtMessage;
 public class NbtMessageUtil {
 
     public static NbtMessage create(String json) {
-        BinaryTag compoundBinaryTag = fromJson(JsonParser.parseString(json));
+        CompoundBinaryTag compoundBinaryTag = (CompoundBinaryTag) fromJson(JsonParser.parseString(json));
 
         return new NbtMessage(json, compoundBinaryTag);
     }

@@ -17,6 +17,7 @@
 
 package ua.nanit.limbo.protocol.packets.login;
 
+import io.netty.handler.codec.DecoderException;
 import ua.nanit.limbo.connection.ClientConnection;
 import ua.nanit.limbo.protocol.ByteMessage;
 import ua.nanit.limbo.protocol.PacketIn;
@@ -47,8 +48,11 @@ public class PacketLoginPluginResponse implements PacketIn {
         successful = msg.readBoolean();
 
         if (msg.readableBytes() > 0) {
-            int i = msg.readableBytes();
-            data = new ByteMessage(msg.readBytes(i));
+            int readableBytes = msg.readableBytes();
+            if (readableBytes > Short.MAX_VALUE) {
+                throw new DecoderException("Cannot receive payload larger than " + Short.MAX_VALUE);
+            }
+            data = new ByteMessage(msg.readBytes(readableBytes));
         }
     }
 

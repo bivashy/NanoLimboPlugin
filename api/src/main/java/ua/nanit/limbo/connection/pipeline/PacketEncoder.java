@@ -45,7 +45,7 @@ public class PacketEncoder extends MessageToByteEncoder<Packet> {
         int packetId;
 
         if (packet instanceof PacketSnapshot) {
-            packetId = registry.getPacketId(((PacketSnapshot)packet).getWrappedPacket().getClass());
+            packetId = registry.getPacketId(((PacketSnapshot)packet).getPacketClass());
         } else {
             packetId = registry.getPacketId(packet.getClass());
         }

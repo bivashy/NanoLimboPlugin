@@ -56,4 +56,9 @@ public class PacketBossBar implements PacketOut {
         msg.writeByte(flags);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
 }

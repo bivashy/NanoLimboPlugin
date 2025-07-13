@@ -40,4 +40,9 @@ public class PacketPlayerListHeader implements PacketOut {
         msg.writeNbtMessage(header, version);
         msg.writeNbtMessage(footer, version);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }
